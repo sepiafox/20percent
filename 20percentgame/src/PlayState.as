@@ -5,12 +5,12 @@ package
 	 * @author sepiafox
 	 */
 	
-	 import org.flixel.system.FlxPreloader;
+	 import org.flixel.*;
 	 
-	public class PlayState 
+	public class PlayState extends FlxState
 	{
 		
-		public function PlayState() extends FlxState
+		public function PlayState()
 		{
 			var background:FlxSprite;//declaring object type of background
 			background = new FlxSprite();//assigning background val
