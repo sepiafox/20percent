@@ -4,28 +4,13 @@ package
 	 
 	public class MapTilemap extends FlxTilemap
 	{
-		[Embed(source = "data/tilemap.png")] private var tilemapPng:Class;
+		[Embed(source = "data/tilemap14.png")] private var tilemapPng:Class;
 		
-		private var mapData:Array = 
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-			1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+		[Embed(source = "data/map1.txt", mimeType = "application/octet-stream")] private var mapTxt:Class;
 			
 		public function MapTilemap() 
 		{
-			loadMap(FlxTilemap.arrayToCSV(mapData, 20), tilemapPng);
+			loadMap(new mapTxt, tilemapPng, 16, 16, 0, 0, 0);
 		}
 		
 	}
