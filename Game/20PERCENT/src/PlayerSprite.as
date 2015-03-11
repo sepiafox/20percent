@@ -5,13 +5,14 @@ package {
     public class PlayerSprite extends FlxSprite {
     
         private var _jump:Number;
-		[Embed(source = "data/walk.png")] private var WalkPng:Class;
+		[Embed(source = "data/walk3.png")] private var WalkPng:Class;
         private var speed:int = 130;
 		
 		public function PlayerSprite(X:Number, Y:Number) {
             super(X,Y);
             acceleration.y = 1200; //Set the gravity 
             maxVelocity.y = 300;
+			maxVelocity.x = 50;
 			
 			loadGraphic(WalkPng, true, false);
 			
