@@ -2,15 +2,20 @@ package {
  
     import org.flixel.*;
  
-    public class PlayerSprite extends FlxSprite {
+    public class EnemySprite extends FlxSprite {
     
         private var jump:Number = 0;
 		private var jumppause:Number = 0;
 		private var ttime:Number = 0;
 		private var djump:Boolean = false; //double jump
+		//enemy movement variables
+		private var tojump:Boolean = false;
+		private var toleft:Boolean = false;
+		private var toright:Boolean = false;
+		private var totele:Boolean = false;
 		[Embed(source = "data/walk3.png")] private var WalkPng:Class;
 		
-		public function PlayerSprite(X:Number, Y:Number) {
+		public function EnemySprite(X:Number, Y:Number) {
             super(X,Y);
 			
 			loadGraphic(WalkPng, true, false);
@@ -30,7 +35,7 @@ package {
 			
 
 			//platform jumping, complete with double jumping enabler
-			if( (jump <= .5) && ((FlxG.keys.W) || (FlxG.keys.UP)) )
+			if( (jump <= .5) && (tojump == true) )
             {
 				if (jump < 0.065) 
 				{
@@ -61,12 +66,12 @@ package {
 				ttime = 0;
 			}
 			
-			if (FlxG.keys.A || FlxG.keys.LEFT)
+			if (toleft == true)
 			{
 				velocity.x -= 130;
 				play("Left");
 			}
-			if (FlxG.keys.D || FlxG.keys.RIGHT)
+			if (toright == true)
 			{
 				velocity.x += 130;
 				play("Right");
