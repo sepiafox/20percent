@@ -30,24 +30,24 @@ package {
 			
 
 			//platform jumping, complete with double jumping enabler
-			if( (jump <= .5) && ((FlxG.keys.W) || (FlxG.keys.UP)) )
+			if(velocity.y == 0 && ((FlxG.keys.W) || (FlxG.keys.UP)))//(jump <= .9)
             {
-				if (jump < 0.065) 
-				{
-                    velocity.y = -120; 
-                }
+				//if (jump < 0.065) 
+				//{
+                    velocity.y = -180; //jump power //was 120
+                //}
 				
-				jump += FlxG.elapsed; //timer
+				//jump += FlxG.elapsed; //timer
             }
-			if(jump > .5)
-			{
-				jumppause += FlxG.elapsed; // jump delay timer
-			}
-			if (jumppause > .95) //jump delay
-			{
-				jumppause = 0;
-				jump = 0;
-			}
+			//if(jump > .9)
+			//{
+			//	jumppause += FlxG.elapsed; // jump delay timer
+			//}
+			//if (jumppause > .95) //jump delay 
+			//{
+			//	jumppause = 0;
+			//	jump = 0;
+			//}
 			
 			//teleportion
 			if (FlxG.keys.SHIFT)

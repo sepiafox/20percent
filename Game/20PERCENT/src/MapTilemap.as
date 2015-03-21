@@ -4,7 +4,7 @@ package
 	 
 	public class MapTilemap extends FlxTilemap
 	{
-		[Embed(source = "data/tilemap15.png")] private var tilemapPng:Class;
+		[Embed(source = "data/tilemap16.png")] private var tilemapPng:Class;
 		
 		[Embed(source = "data/map1.txt", mimeType = "application/octet-stream")] private var mapTxt:Class;
 			

@@ -13,7 +13,7 @@ package {
 		private var toleft:Boolean = false;
 		private var toright:Boolean = false;
 		private var totele:Boolean = false;
-		[Embed(source = "data/walk3.png")] private var WalkPng:Class;
+		[Embed(source = "data/walk4.png")] private var WalkPng:Class;
 		
 		public function EnemySprite(X:Number, Y:Number) {
             super(X,Y);
@@ -35,24 +35,10 @@ package {
 			
 
 			//platform jumping, complete with double jumping enabler
-			if( (jump <= .5) && (tojump == true) )
+			if(velocity.y == 0 && tojump == true) //(jump <= .9)
             {
-				if (jump < 0.065) 
-				{
-                    velocity.y = -120; 
-                }
-				
-				jump += FlxG.elapsed; //timer
+                    velocity.y = -180; 
             }
-			if(jump > .5)
-			{
-				jumppause += FlxG.elapsed; // jump delay timer
-			}
-			if (jumppause > .95) //jump delay
-			{
-				jumppause = 0;
-				jump = 0;
-			}
 			
 			//teleportion
 			if (FlxG.keys.SHIFT)
