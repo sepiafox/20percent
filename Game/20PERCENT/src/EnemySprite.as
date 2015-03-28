@@ -8,15 +8,23 @@ package {
 		private var jumppause:Number = 0;
 		private var ttime:Number = 0;
 		private var djump:Boolean = false; //double jump
+		
 		//enemy movement variables
 		private var tojump:Boolean = false;
 		private var toleft:Boolean = false;
 		private var toright:Boolean = false;
 		private var totele:Boolean = false;
+		
+		private var distance:Number;
+		private var jumpfail:Boolean = false; //checks if the jump was succesful in going up 
+		private var fallfail:Boolean = false; // does the same as jumpfail for hopping down
+		private var shootfail:Boolean = false; //checks to see if enemy bullet sprite was blocked by wall
+		
 		[Embed(source = "data/walk4.png")] private var WalkPng:Class;
 		
 		public function EnemySprite(X:Number, Y:Number) {
             super(X,Y);
+			
 			
 			loadGraphic(WalkPng, true, false);
 			
@@ -27,7 +35,51 @@ package {
 			
         }
         override public function update():void {
-				
+			
+			tojump = false;
+			toleft = false;
+			toright = false;
+			totele = false;
+			
+			distance = xpos - x;
+			oldy = y;
+			
+			//AI
+			if (xpos > x && distance > 10)
+			{
+				toright = true;
+			}
+			
+			if (xpos < x && distance > 10)
+			{
+				toleft = true;
+			}
+			
+			if (ypos > y && jumpfail == false)
+			{
+				tojump = true;
+				toleft = true;
+			}
+			
+			if (ypos > y && jumpfail == true)
+			{
+				tojump = true;
+				toright = true;
+				jumpfail = false;
+			}
+			
+			if (ypos < y && fallfail == false)
+			{
+				toleft = true;
+			}
+			
+			if (ypos < y && fallfail == true)
+			{
+				toright = true;
+				fallfail = false;
+			}
+			
+			
 			acceleration.y = 200; //gravity 
 			//acceleration.x = 50; //wind mechanic if ever needed...
             maxVelocity.y = 800; //falling max v
@@ -61,6 +113,17 @@ package {
 			{
 				velocity.x += 130;
 				play("Right");
+			}
+			
+			//more AI - jumpfail and fallfail
+			if (tojump == true && y == oldy) 
+			{
+				jumpfail = true;
+			}
+			
+			if (ypos < y && y == oldy)
+			{
+				fallfail = true;
 			}
 			
             super.update();

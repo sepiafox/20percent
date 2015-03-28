@@ -7,6 +7,8 @@ package
 		private var player:PlayerSprite;
 		private var enemy:EnemySprite;
 		private var map:MapTilemap;
+		public static var xpos:Number;
+		public static var ypos:Number;
 		
 		public function PlayState()
 		{	
@@ -27,13 +29,18 @@ package
 			//FlxG.camera.follow(player);
 			
 			//player.cameras = new Array(FlxG.camera);
+			
+			
 		}
 		override public function update():void
 		{
 			super.update(); 
+			xpos = player.x;
+			ypos = player.y;
 			FlxG.collide(player, map);
 			FlxG.collide(enemy, map);
 			FlxG.collide(player, enemy);
+			
 		}	
 	}
 }

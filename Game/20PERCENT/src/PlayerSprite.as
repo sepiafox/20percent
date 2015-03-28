@@ -8,6 +8,7 @@ package {
 		private var jumppause:Number = 0;
 		private var ttime:Number = 0;
 		private var djump:Boolean = false; //double jump
+		
 		[Embed(source = "data/walk3.png")] private var WalkPng:Class;
 		
 		public function PlayerSprite(X:Number, Y:Number) {
@@ -22,6 +23,7 @@ package {
 			
         }
         override public function update():void {
+			
 				
 			acceleration.y = 200; //gravity 
 			//acceleration.x = 50; //wind mechanic if ever needed...
