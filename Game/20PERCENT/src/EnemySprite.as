@@ -15,6 +15,8 @@ package {
 		private var toright:Boolean = false;
 		private var totele:Boolean = false;
 		
+		private var timer:Number = 0;
+		
 		private var distance:Number;
 		private var jumpfail:Boolean = false; //checks if the jump was succesful in going up 
 		private var fallfail:Boolean = false; // does the same as jumpfail for hopping down
@@ -41,43 +43,53 @@ package {
 			toright = false;
 			totele = false;
 			
-			distance = xpos - x;
-			oldy = y;
+			//distance = xpos - x;
+			//oldy = y;
+			
+			if (timer = 0)
+			{
+				timer += FlxG.elapsed;
+			}
+			
+			if (timer > 10)
+			{
+				timer = 0;
+			}
 			
 			//AI
-			if (xpos > x && distance > 10)
+			if (timer < 1 && timer > 0)//xpos > x && distance > 10)
 			{
 				toright = true;
 			}
 			
-			if (xpos < x && distance > 10)
+			if (timer < 3 && timer > 2)//xpos < x && distance > 10)
 			{
 				toleft = true;
 			}
 			
-			if (ypos > y && jumpfail == false)
+			if (timer < 4 && timer > 3)//ypos > y && jumpfail == false)
 			{
 				tojump = true;
 				toleft = true;
 			}
 			
-			if (ypos > y && jumpfail == true)
+			if (timer < 2 && timer > 1)//ypos > y && jumpfail == true)
 			{
 				tojump = true;
 				toright = true;
 				jumpfail = false;
 			}
 			
-			if (ypos < y && fallfail == false)
-			{
-				toleft = true;
-			}
+			//if (ypos < y && fallfail == false)
+			//{
+			//	toleft = true;
+			//}
 			
-			if (ypos < y && fallfail == true)
-			{
-				toright = true;
-				fallfail = false;
-			}
+			//if (ypos < y && fallfail == true)
+			//{
+			//	toright = true;
+			//	fallfail = false;
+			//}
 			
 			
 			acceleration.y = 200; //gravity 
@@ -104,6 +116,7 @@ package {
 				ttime = 0;
 			}
 			
+			//movement
 			if (toleft == true)
 			{
 				velocity.x -= 130;
@@ -116,15 +129,15 @@ package {
 			}
 			
 			//more AI - jumpfail and fallfail
-			if (tojump == true && y == oldy) 
-			{
-				jumpfail = true;
-			}
+			//if (tojump == true && y == oldy) 
+			//{
+			//	jumpfail = true;
+			//}
 			
-			if (ypos < y && y == oldy)
-			{
-				fallfail = true;
-			}
+			//if (ypos < y && y == oldy)
+			//{
+			//	fallfail = true;
+			//}
 			
             super.update();
         }

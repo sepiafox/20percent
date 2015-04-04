@@ -2,7 +2,7 @@ package {
  
     import org.flixel.*;
  
-    public class BulletSprite extends FlxSprite {
+    public class EnemyBulletSprite extends FlxSprite {
     
         private var jump:Number = 0;
 		private var jumppause:Number = 0;
@@ -13,9 +13,9 @@ package {
 		
 		private var timer:Number = 0;
 		
-		[Embed(source = "data/bullet.png")] private var WalkPng:Class;
+		[Embed(source = "data/bullet2.png")] private var WalkPng:Class;
 		
-		public function BulletSprite(X:Number, Y:Number) {
+		public function EnemyBulletSprite(X:Number, Y:Number) {
             super(X,Y);
 			
 			loadGraphic(WalkPng, true, false);
@@ -31,34 +31,37 @@ package {
 			
 			maxVelocity.x = 0; // prevent sliding
 			
-			//timer
-			if (timer <= 1)
+			if (timer = 0)
 			{
-				pressed = false;
+				timer += FlxG.elapsed;
+			}
+			
+			if (timer > 1)
+			{
 				timer = 0;
 			}
 			
 			//movement
-			if (pressed == false)
+			if (timer != 1)
 			{
 				play("Up");
 				//x = xpos;
 				//y = ypos;
 			}
 			
-			if (FlxG.keys.SPACE) //&& facing == FlxSprite.LEFT)
+			if (timer = 1)
 			{
 				pressed = true;
 				velocity.x -= 130;
 				play("Left");
-				timer += FlxG.elapsed;
+
 			}
-			//if (FlxG.keys.SPACE) //&& facing == FlxSprite.RIGHT)
-			//{
-			//	pressed = true;
-			//	velocity.x += 130;
-			//	play("Right");
-			//	timer = FlxG.elapsed;
+			if (timer = 1)
+			{
+				pressed = true;
+				velocity.x += 130;
+				play("Right");
+			}
 			
             super.update();
         }

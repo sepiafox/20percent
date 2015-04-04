@@ -9,6 +9,9 @@ package {
 		private var ttime:Number = 0;
 		private var djump:Boolean = false; //double jump
 		
+		private var healthpow:Number = 100;
+		private var power:Number = 10;
+		
 		[Embed(source = "data/walk3.png")] private var WalkPng:Class;
 		
 		public function PlayerSprite(X:Number, Y:Number) {
@@ -29,6 +32,12 @@ package {
 			//acceleration.x = 50; //wind mechanic if ever needed...
             maxVelocity.y = 800; //falling max v
 			maxVelocity.x = 0; // prevent sliding
+			
+			//health&powerstats
+			
+			
+			
+			
 			
 
 			//platform jumping, complete with double jumping enabler

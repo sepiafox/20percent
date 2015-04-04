@@ -6,6 +6,10 @@ package
 	{
 		private var player:PlayerSprite;
 		private var enemy:EnemySprite;
+		
+		private var bullet:BulletSprite;
+		private var enebullet:EnemyBulletSprite;
+		
 		private var map:MapTilemap;
 		public static var xpos:Number;
 		public static var ypos:Number;
@@ -20,7 +24,10 @@ package
 			add(map);
 			
 			player = new PlayerSprite(50, 50);
-			enemy = new EnemySprite(100,50)
+			enemy = new EnemySprite(100, 50);
+			bullet = new BulletSprite(50, 50);
+			enebullet = new EnemyBulletSprite(100, 50);
+			
 			add(player);
 			add(enemy);
 			
