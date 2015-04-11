@@ -46,7 +46,7 @@ package {
 			//distance = xpos - x;
 			//oldy = y;
 			
-			if (timer = 0)
+			if (timer == 0)
 			{
 				timer += FlxG.elapsed;
 			}

@@ -9,6 +9,10 @@ package
 		public function HelloWorld()
 		{
 			super(320, 240, PlayState, 2);
+			if (PlayState.paused = true)
+			{
+				//FlxG.switchState(MenuState); //gives error
+			}
 			forceDebugger = false; // might not need
 		}
 	}

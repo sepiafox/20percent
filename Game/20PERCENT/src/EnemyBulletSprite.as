@@ -31,7 +31,7 @@ package {
 			
 			maxVelocity.x = 0; // prevent sliding
 			
-			if (timer = 0)
+			if (timer == 0)
 			{
 				timer += FlxG.elapsed;
 			}
@@ -49,14 +49,14 @@ package {
 				//y = ypos;
 			}
 			
-			if (timer = 1)
+			if (timer == 1)
 			{
 				pressed = true;
 				velocity.x -= 130;
 				play("Left");
 
 			}
-			if (timer = 1)
+			if (timer == 1)
 			{
 				pressed = true;
 				velocity.x += 130;

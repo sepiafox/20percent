@@ -2,7 +2,7 @@ package
 {
 	import org.flixel.*;
 	 
-	public class PlayState extends FlxState
+	public class PlayState3 extends FlxState
 	{
 		private var player:PlayerSprite;
 		private var enemy:EnemySprite;
@@ -15,17 +15,17 @@ package
 		public static var ypos:Number;
 		public static var paused:Boolean;
 		
-		public function PlayState()
+		public function PlayState3()
 		{	
 			
 		}
 		override public function create():void 
 		{
-			map = new MapTilemap();
+			map = new MapTilemap();//change map
 			add(map);
 			
-			player = new PlayerSprite(50, 50);
-			enemy = new EnemySprite(100, 50);
+			player = new PlayerSprite(50, 50); //change character
+			enemy = new EnemySprite(100, 50); //change character
 			bullet = new BulletSprite(50, 50);
 			enebullet = new EnemyBulletSprite(100, 50);
 			
