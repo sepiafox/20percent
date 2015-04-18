@@ -10,10 +10,15 @@ package
 		private var bullet:BulletSprite;
 		private var enebullet:EnemyBulletSprite;
 		
+		private var menu:MenuState;
+		private var save:PlayState;
+		
 		private var map:MapTilemap;
 		public static var xpos:Number;
 		public static var ypos:Number;
+		
 		public static var paused:Boolean;
+		
 		
 		public function PlayState()
 		{	
@@ -29,6 +34,10 @@ package
 			bullet = new BulletSprite(50, 50);
 			enebullet = new EnemyBulletSprite(100, 50);
 			
+			menu = new MenuState();
+			
+			paused = false;
+			
 			add(player);
 			add(enemy);
 			
@@ -38,16 +47,28 @@ package
 			
 			//player.cameras = new Array(FlxG.camera);
 			
-			if (FlxG.keys.P)
-			{
-				paused = true;
-			}
 			
 			
 		}
 		override public function update():void
 		{
 			super.update(); 
+			
+			save = this;
+			
+			//menu w/ toggle
+			if (paused == true && FlxG.keys.P)
+			{
+				paused = false;
+				FlxG.switchState(save);
+			}
+			if (paused == false && FlxG.keys.P)
+			{
+				paused = true;
+				FlxG.switchState(menu); 
+			}
+
+			//FlxPoint po = 
 			xpos = player.x;
 			ypos = player.y;
 			FlxG.collide(player, map);

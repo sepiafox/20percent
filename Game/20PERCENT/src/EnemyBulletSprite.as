@@ -47,6 +47,7 @@ package {
 				play("Up");
 				//x = xpos;
 				//y = ypos;
+				//.getScreenXY()
 			}
 			
 			if (timer == 1)

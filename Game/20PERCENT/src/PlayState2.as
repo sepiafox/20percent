@@ -10,6 +10,9 @@ package
 		private var bullet:BulletSprite;
 		private var enebullet:EnemyBulletSprite;
 		
+		private var menu2:MenuState;
+		private var save2:PlayState;
+		
 		private var map:MapTilemap;
 		public static var xpos:Number;
 		public static var ypos:Number;
@@ -28,6 +31,10 @@ package
 			enemy = new EnemySprite(100, 50); //change character
 			bullet = new BulletSprite(50, 50);
 			enebullet = new EnemyBulletSprite(100, 50);
+			
+			menu2 = new MenuState();
+			
+			paused = false;
 			
 			add(player);
 			add(enemy);
@@ -48,6 +55,20 @@ package
 		override public function update():void
 		{
 			super.update(); 
+			
+			save = this;
+			
+			//menu w/ toggle
+			if (paused == true && FlxG.keys.P)
+			{
+				paused = false;
+				FlxG.switchState(save);
+			}
+			if (paused == false && FlxG.keys.P)
+			{
+				paused = true;
+				FlxG.switchState(menu2); 
+			}
 			xpos = player.x;
 			ypos = player.y;
 			FlxG.collide(player, map);

@@ -44,6 +44,7 @@ package {
 				play("Up");
 				//x = xpos;
 				//y = ypos;
+				//.getScreenXY()
 			}
 			
 			if (FlxG.keys.SPACE) //&& facing == FlxSprite.LEFT)
