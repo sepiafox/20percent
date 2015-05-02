@@ -6,10 +6,25 @@ package
  
 	public class HelloWorld extends FlxGame
 	{
+		//level save
 		private var one:Boolean;
 		private var two:Boolean;
 		private var three:Boolean;
 		private var four:Boolean;
+		
+		//wind selection
+		private var bot:Number;
+		private var top:Number;
+		private var rig:Number;
+		private var lef:Number;
+		private var windy:Boolean;
+		
+		//player save
+		private var healthsave:Number;
+		private var powsave:Number;
+		private var bluesave:Boolean;
+		private var yellowsave:Boolean;
+		
 		
 		public function HelloWorld()
 		{
@@ -20,5 +35,18 @@ package
 			//}
 			forceDebugger = false; // might not need
 		}
+		
+		//public function accessWind()
+		//{
+			
+			//if (x > bot && x < top && y > rig && y < lef) 
+			//	{ 
+			//	windy = true; 
+			//}
+			//else 
+			//{ 
+			//	windy = false; 
+			//}
+		//}
 	}
 }

@@ -9,8 +9,13 @@ package {
 		private var ttime:Number = 0;
 		private var djump:Boolean = false; //double jump
 		
-		private var healthpow:Number = 100;
-		private var power:Number = 10;
+		private var healthnum:Number = 100;
+		private var htimer:Number;
+		private var power:Number = 1;
+		
+		//player's bullet types
+		private var blue:Boolean; //unlocks at power 4
+		private var yellow:Boolean;//unlocks at power 5
 		
 		[Embed(source = "data/walk3.png")] private var WalkPng:Class;
 		
@@ -35,13 +40,27 @@ package {
 			
 			//health&powerstats
 			
+			htimer = FlxG.elapsed; 
 			
+			if ( htimer == 10 ) 
+			{
+				healthnum++; 
+				htimer = 0; 
+			}
 			
-			
+			//bullet control
+			if (power == 2) 
+			{ 
+				blue = true; 
+			}
+			if (power == 3) 
+			{
+				blue = false; yellow = true; 
+			}
 			
 
 			//platform jumping, complete with double jumping enabler
-			if(velocity.y == 0 && ((FlxG.keys.W) || (FlxG.keys.UP)))//(jump <= .9)
+			if(velocity.y == 0 && ((FlxG.keys.W) || (FlxG.keys.UP)) )//(jump <= .9)
             {
 				//if (jump < 0.065) 
 				//{

@@ -3,11 +3,14 @@ package
 	import org.flixel.*;
 	 
 	public class MenuState extends FlxState
-	{
-		private var title:FlxSprite;
-		private var level:FlxSprite;
-		private var restart:FlxSprite;
-		private var restart2:FlxSprite;
+	{		
+		[Embed(source = "data/Lev1.png")] private var Lev1Png:Class;
+		[Embed(source = "data/Lev2.png")] private var Lev2Png:Class;
+		[Embed(source = "data/Lev3.png")] private var Lev3Png:Class;
+		[Embed(source = "data/Lev4.png")] private var Lev4Png:Class;
+		
+		[Embed(source = "data/ReG.png")] private var ReGPng:Class;
+		[Embed(source = "data/ReL.png")] private var ReLPng:Class;
 		
 		public function MenuState()
 		{	
@@ -15,17 +18,16 @@ package
 		}
 		override public function create():void 
 		{
-			title = new FlxSprite(0,0,100,"Pause Menu");
-			add(title);
+			add(new FlxText(0,0,100,"Menu")); 
 			
-			level = new FlxSprite(100,0,100,"Levels:");
-			add(level);
+			add(new FlxSprite(0, 20, Lev1Png)); //more complex sprites to be added later
+			add(new FlxSprite(0, 40, Lev2Png));
+			add(new FlxSprite(0, 60, Lev3Png));
+			add(new FlxSprite(0, 80, Lev4Png));
 			
-			restart = new FlxSprite(200,0,100,"Restart Game");
-			add(restart);
+			add(new FlxSprite(0, 120, ReGPng));
 			
-			restart2 = new FlxSprite(200,0,100,"Restart Level");
-			add(restart2);
+			add(new FlxSprite(0, 170, ReLPng)); 
 		}
 		override public function update():void
 		{
