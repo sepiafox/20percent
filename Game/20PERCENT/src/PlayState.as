@@ -10,12 +10,12 @@ package
 		private var bullet:BulletSprite;
 		private var enebullet:EnemyBulletSprite;
 		
-		private var menu:MenuState;
-		private var save:PlayState;
+		private var paused:Boolean = false;
 		
+		private var menu:MenuState;
 		private var map:MapTilemap;
-		public static var xpos:Number;
-		public static var ypos:Number;
+		
+		private var save:PlayState;
 		
 		public static var paused:Boolean;
 		
@@ -39,22 +39,18 @@ package
 			paused = false;
 			
 			add(player);
+			add(bullet);
 			add(enemy);
+			add(enebullet);
 			
-			FlxG.worldBounds = new FlxRect(0, 0, map.width, map.height);
-			//FlxG.camera.setBounds(0, 0, map.width, map.height, true);
-			//FlxG.camera.follow(player);
-			
-			//player.cameras = new Array(FlxG.camera);
-			
-			
+			FlxG.worldBounds = new FlxRect(0, 0, map.width, map.height);		
 			
 		}
 		override public function update():void
 		{
 			super.update(); 
 			
-			save = this;
+			//save = this;
 			
 			//menu w/ toggle
 			if (paused == true && FlxG.keys.P)
@@ -68,12 +64,17 @@ package
 				FlxG.switchState(menu); 
 			}
 
-			//FlxPoint po = 
-			xpos = player.x;
-			ypos = player.y;
 			FlxG.collide(player, map);
 			FlxG.collide(enemy, map);
 			FlxG.collide(player, enemy);
+			
+			FlxG.collide(bullet, map);
+			FlxG.collide(enebullet, map);
+			FlxG.(bullet, enemy);
+			FlxG.collide(enebullet, player);
+			
+			varSave.eneDama = FlxG.overlap(bullet, enemy);
+			varSave.playDama = FlxG.overlap(enebullet, player);
 			
 		}	
 	}

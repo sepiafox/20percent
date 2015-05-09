@@ -27,6 +27,7 @@ package {
 		public function EnemySprite(X:Number, Y:Number) {
             super(X,Y);
 			
+			//teleportation enemy
 			
 			loadGraphic(WalkPng, true, false);
 			
@@ -46,7 +47,7 @@ package {
 			//distance = xpos - x;
 			//oldy = y;
 			
-			if (timer < 0)
+			if (timer == 0)
 			{
 				timer += FlxG.elapsed;
 			}
@@ -105,16 +106,16 @@ package {
             }
 			
 			//teleportion
-			if (FlxG.keys.SHIFT)
-			{
-				velocity.x = 1200;
-				ttime += FlxG.elapsed; //time it takes to "teleport"
-			}
-			if(ttime > .065)
-			{
-				velocity.x = 0;
-				ttime = 0;
-			}
+			//if (FlxG.keys.SHIFT)
+			//{
+			//	velocity.x = 1200;
+			//	ttime += FlxG.elapsed; //time it takes to "teleport"
+			//}
+			//if(ttime > .065)
+			//{
+			//	velocity.x = 0;
+			//	ttime = 0;
+			//}
 			
 			//movement
 			if (toleft == true)

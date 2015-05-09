@@ -9,10 +9,11 @@ package {
 		private var ttime:Number = 0;
 		private var djump:Boolean = false; //double jump
 		
-		private var healthnum:Number = 100;
-		private var htimer:Number;
-		private var power:Number = 1;
+		private var goingLeft:Boolean;
+		private var goingRight:Boolean;
 		
+		private var htimer:Number;
+
 		//player's bullet types
 		private var blue:Boolean; //unlocks at power 4
 		private var yellow:Boolean;//unlocks at power 5
@@ -20,7 +21,8 @@ package {
 		[Embed(source = "data/walk3.png")] private var WalkPng:Class;
 		
 		public function PlayerSprite(X:Number, Y:Number) {
-            super(X,Y);
+            super(X, Y);
+			
 			
 			loadGraphic(WalkPng, true, false);
 			
@@ -29,8 +31,14 @@ package {
 			addAnimation("Left", [6, 7, 8], 10, false);
 			addAnimation("Up", [9, 10, 11], 10, false);
 			
+			varSave.playerhea = 100;
+			varSave.playerpow = 1;
+			
         }
         override public function update():void {
+			
+			varSave.playerX = x;
+			varSave.playerY = y;
 			
 				
 			acceleration.y = 200; //gravity 
@@ -44,16 +52,16 @@ package {
 			
 			if ( htimer == 10 ) 
 			{
-				healthnum++; 
+				varSave.playerhea++; 
 				htimer = 0; 
 			}
 			
 			//bullet control
-			if (power == 2) 
+			if (varSave.playerpow == 2) 
 			{ 
 				blue = true; 
 			}
-			if (power == 3) 
+			if (varSave.playerpow == 3) 
 			{
 				blue = false; yellow = true; 
 			}
@@ -95,11 +103,36 @@ package {
 			{
 				velocity.x -= 130;
 				play("Left");
+				varSave.plRight = false;
+				varSave.plLeft = true;
+				goingLeft = true;
 			}
+			else 
+			{
+				goingLeft = false;
+			}
+
 			if (FlxG.keys.D || FlxG.keys.RIGHT)
 			{
 				velocity.x += 130;
 				play("Right");
+				varSave.plLeft = false;
+				varSave.plRight = true;
+				goingRight = true;
+			}
+			else
+			{
+				goingRight = false;
+			}
+			
+			if (varSave.playDama == true)
+			{
+				health--;
+			}
+			
+			if (health == 0)
+			{
+				varSave.gameOver == true;
 			}
 			
             super.update();

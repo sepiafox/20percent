@@ -3,15 +3,13 @@ package {
     import org.flixel.*;
  
     public class BulletSprite extends FlxSprite {
-    
-        private var jump:Number = 0;
-		private var jumppause:Number = 0;
-		private var ttime:Number = 0;
-		private var djump:Boolean = false; //double jump
-		
+    	
 		private var pressed:Boolean = false;
 		
 		private var timer:Number = 0;
+		
+		private var prLeft:Boolean;
+		private var prRight:Boolean;
 		
 		[Embed(source = "data/bullet.png")] private var WalkPng:Class;
 		
@@ -32,34 +30,55 @@ package {
 			maxVelocity.x = 0; // prevent sliding
 			
 			//timer
-			if (timer <= 1)
-			{
-				pressed = false;
-				timer = 0;
-			}
+			//if (pressed = true)
+			//{
+			//	timer = FlxG.elapsed;
+			//}
+			//if (timer > 1)
+			//{
+			//	timer = 0;
+			//	pressed = false;
+			//}
+			
 			
 			//movement
-			if (pressed == false)
+			//if (pressed == false)
+			//{
+			//	play("Up");
+			//	x = varSave.playerX;
+			//	y = varSave.playerY;
+			//}
+			if (velocity.x == 0 && prLeft == false && prRight == false)
 			{
 				play("Up");
-				//x = xpos;
-				//y = ypos;
-				//.getScreenXY()
+				x = varSave.playerX;
+				y = varSave.playerY;
+				prLeft = false;
+				prRight = false;
 			}
 			
-			if (FlxG.keys.SPACE) //&& facing == FlxSprite.LEFT)
+			if (FlxG.keys.SPACE && varSave.plLeft == true)// && timer <= 1)
 			{
-				pressed = true;
-				velocity.x -= 130;
+				prLeft = true;
 				play("Left");
-				timer += FlxG.elapsed;
+				velocity.x -= 400;
 			}
-			//if (FlxG.keys.SPACE) //&& facing == FlxSprite.RIGHT)
-			//{
-			//	pressed = true;
-			//	velocity.x += 130;
-			//	play("Right");
-			//	timer = FlxG.elapsed;
+			else
+			{
+				prLeft = false;
+			}
+
+			if (FlxG.keys.SPACE && varSave.plRight == true)// && timer <= 1)
+			{
+				prRight = true;
+				velocity.x += 400;
+				play("Right");	 
+			}
+			else 
+			{
+				prRight = false; 
+			}
+			
 			
             super.update();
         }
