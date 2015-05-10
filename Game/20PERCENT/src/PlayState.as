@@ -19,6 +19,9 @@ package
 		
 		public static var paused:Boolean;
 		
+		public var cat:CatSprite;
+		public var cattimer:Number = 0;
+		
 		
 		public function PlayState()
 		{	
@@ -34,6 +37,8 @@ package
 			bullet = new BulletSprite(50, 50);
 			enebullet = new EnemyBulletSprite(100, 50);
 			
+			cat = new CatSprite(0,0);
+			
 			menu = new MenuState();
 			
 			paused = false;
@@ -43,12 +48,19 @@ package
 			add(enemy);
 			add(enebullet);
 			
+			add(cat);
+			
 			FlxG.worldBounds = new FlxRect(0, 0, map.width, map.height);		
 			
 		}
 		override public function update():void
 		{
 			super.update(); 
+			
+			if ( (varSave.plLeft || varSave.plRight) != 0)
+			{
+				remove(cat);
+			}
 			
 			//save = this;
 			
@@ -63,6 +75,9 @@ package
 				paused = true;
 				FlxG.switchState(menu); 
 			}
+			
+			//to next state
+			
 
 			FlxG.collide(player, map);
 			FlxG.collide(enemy, map);
@@ -70,7 +85,7 @@ package
 			
 			FlxG.collide(bullet, map);
 			FlxG.collide(enebullet, map);
-			FlxG.(bullet, enemy);
+			FlxG.collide(bullet, enemy);
 			FlxG.collide(enebullet, player);
 			
 			varSave.eneDama = FlxG.overlap(bullet, enemy);

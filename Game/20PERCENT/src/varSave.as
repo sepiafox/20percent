@@ -18,7 +18,7 @@ package
 		
 		//state switching
 		public static var gameOver:Boolean = false;
-		public static var unlocklevs:Number; //level
+		public static var unlocklevs:Number = 1; //level 1-4
 		
 	}
 	

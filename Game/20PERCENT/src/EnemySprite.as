@@ -17,9 +17,10 @@ package {
 		
 		private var timer:Number = 0;
 		
-		private var distance:Number;
+		private var distx:Number;
 		private var jumpfail:Boolean = false; //checks if the jump was succesful in going up 
 		private var fallfail:Boolean = false; // does the same as jumpfail for hopping down
+		private var oldy:Boolean; //old y value to compare for fail checks
 		private var shootfail:Boolean = false; //checks to see if enemy bullet sprite was blocked by wall
 		
 		[Embed(source = "data/walk4.png")] private var WalkPng:Class;
@@ -44,42 +45,53 @@ package {
 			toright = false;
 			totele = false;
 			
-			//distance = xpos - x;
+			distx = Math.abs(varSave.playerX - x);
 			//oldy = y;
 			
-			if (timer == 0)
-			{
-				timer += FlxG.elapsed;
-			}
+			//if (timer == 0)
+			//{
+			//	timer += FlxG.elapsed;
+			//}
 			
-			if (timer > 10)
-			{
-				timer = 0;
-			}
+			//if (timer > 10)
+			//{
+			//	timer = 0;
+			//}
 			
 			//AI
-			if (timer < 1 && timer > 0)//xpos > x && distance > 10)
+			if (varSave.playerX > x && distx > 50)//timer < 1 && timer > 0)//xpos > x && distance > 10)
 			{
+				toleft = false;
 				toright = true;
 			}
 			
-			if (timer < 3 && timer > 2)//xpos < x && distance > 10)
+			if (varSave.playerX < x && distx > 50)//timer < 3 && timer > 2)//xpos < x && distance > 10)
 			{
+				toright = false;
 				toleft = true;
 			}
 			
-			if (timer < 4 && timer > 3)//ypos > y && jumpfail == false)
+			if (varSave.playerY > y)
 			{
 				tojump = true;
-				toleft = true;
+			}
+			else
+			{
+				tojump = false;
 			}
 			
-			if (timer < 2 && timer > 1)//ypos > y && jumpfail == true)
-			{
-				tojump = true;
-				toright = true;
-				jumpfail = false;
-			}
+			//if (timer < 4 && timer > 3)//ypos > y && jumpfail == false)
+			//{
+			//	tojump = true;
+			//	toleft = true;
+			//}
+			
+			//if (timer < 2 && timer > 1)//ypos > y && jumpfail == true)
+			//{
+			//	tojump = true;
+			//	toright = true;
+			//	jumpfail = false;
+			//}
 			
 			//if (ypos < y && fallfail == false)
 			//{
@@ -118,15 +130,15 @@ package {
 			//}
 			
 			//movement
-			if (toleft == true)
-			{
-				velocity.x -= 130;
-				play("Left");
-			}
 			if (toright == true)
 			{
 				velocity.x += 130;
 				play("Right");
+			}
+			if (toleft == true)
+			{
+				velocity.x -= 130;
+				play("Left");
 			}
 			
 			//more AI - jumpfail and fallfail
