@@ -32,7 +32,7 @@ package {
 			addAnimation("Up", [9, 10, 11], 10, false);
 			
 			varSave.playerhea = 100;
-			varSave.playerpow = 1;
+			//varSave.playerpow = 1;
 			
         }
         override public function update():void {
@@ -42,11 +42,59 @@ package {
 			
 				
 			acceleration.y = 200; //gravity 
-			//acceleration.x = 50; //wind mechanic if ever needed...
+			//acceleration.x wind mechanic 
             maxVelocity.y = 800; //falling max v
 			maxVelocity.x = 0; // prevent sliding
 			
-			//health&powerstats
+			
+			
+			//bullet level
+			//if (varSave.playerpow == 2) 
+			//{ 
+			//	blue = true; 
+			//}
+			//if (varSave.playerpow == 3) 
+			//{
+			//	blue = false; yellow = true; 
+			//}
+			
+			
+			//movement
+			if (FlxG.keys.A || FlxG.keys.LEFT)
+			{
+				velocity.x -= 130;
+				play("Left");
+				varSave.plRface = false;
+				varSave.plLface = true;
+				varSave.plgoL = true;
+			}
+			else 
+			{
+				varSave.plgoL = false;
+			}
+
+			if (FlxG.keys.D || FlxG.keys.RIGHT)
+			{
+				velocity.x += 130;
+				play("Right");
+				varSave.plLface = false;
+				varSave.plRface = true;
+				varSave.plgoR = true;
+			}
+			else
+			{
+				varSave.plgoR = false;
+			}
+			if(velocity.y == 0 && ((FlxG.keys.W) || (FlxG.keys.UP)) )
+            {
+                velocity.y = -180; 
+            }
+			
+			//health control
+			if (varSave.playDama == true)
+			{
+				health--;
+			}
 			
 			htimer = FlxG.elapsed; 
 			
@@ -56,27 +104,38 @@ package {
 				htimer = 0; 
 			}
 			
-			//bullet control
-			if (varSave.playerpow == 2) 
-			{ 
-				blue = true; 
-			}
-			if (varSave.playerpow == 3) 
+			if (health == 0)
 			{
-				blue = false; yellow = true; 
+				varSave.gameOver == true;
 			}
 			
-
+		//powers
+		
+			//teleportion
+			if (FlxG.keys.SHIFT)
+			{
+				velocity.x = 1200;
+				ttime += FlxG.elapsed; 
+			}
+			if(ttime > .065)
+			{
+				velocity.x = 0;
+				ttime = 0;
+			}
+			
+			
+			//unused but saved code
+			
 			//platform jumping, complete with double jumping enabler
-			if(velocity.y == 0 && ((FlxG.keys.W) || (FlxG.keys.UP)) )//(jump <= .9)
-            {
+			//if(velocity.y == 0 && ((FlxG.keys.W) || (FlxG.keys.UP)) )//(jump <= .9)
+            //{
 				//if (jump < 0.065) 
 				//{
-                    velocity.y = -180; //jump power //was 120
+            //        velocity.y = -180; //jump power //was 120
                 //}
 				
 				//jump += FlxG.elapsed; //timer
-            }
+            //}
 			//if(jump > .9)
 			//{
 			//	jumppause += FlxG.elapsed; // jump delay timer
@@ -86,54 +145,6 @@ package {
 			//	jumppause = 0;
 			//	jump = 0;
 			//}
-			
-			//teleportion
-			if (FlxG.keys.SHIFT)
-			{
-				velocity.x = 1200;
-				ttime += FlxG.elapsed; //time it takes to "teleport"
-			}
-			if(ttime > .065)
-			{
-				velocity.x = 0;
-				ttime = 0;
-			}
-			
-			if (FlxG.keys.A || FlxG.keys.LEFT)
-			{
-				velocity.x -= 130;
-				play("Left");
-				varSave.plRight = false;
-				varSave.plLeft = true;
-				goingLeft = true;
-			}
-			else 
-			{
-				goingLeft = false;
-			}
-
-			if (FlxG.keys.D || FlxG.keys.RIGHT)
-			{
-				velocity.x += 130;
-				play("Right");
-				varSave.plLeft = false;
-				varSave.plRight = true;
-				goingRight = true;
-			}
-			else
-			{
-				goingRight = false;
-			}
-			
-			if (varSave.playDama == true)
-			{
-				health--;
-			}
-			
-			if (health == 0)
-			{
-				varSave.gameOver == true;
-			}
 			
             super.update();
         }

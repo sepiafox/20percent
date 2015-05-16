@@ -3,15 +3,15 @@ package {
     import org.flixel.*;
  
     public class EnemyBulletSprite extends FlxSprite {
-    
-        private var jump:Number = 0;
-		private var jumppause:Number = 0;
-		private var ttime:Number = 0;
-		private var djump:Boolean = false; //double jump
+	
+		private var btimer:Number = 0;
 		
-		private var pressed:Boolean = false;
+		private var tofire:Boolean = false; 
 		
-		private var timer:Number = 0;
+		//private var diff:Number;
+		
+		private var ebuRight:Boolean = false;
+		private var ebuLeft:Boolean = false;
 		
 		[Embed(source = "data/bullet2.png")] private var WalkPng:Class;
 		
@@ -31,38 +31,53 @@ package {
 			
 			maxVelocity.x = 0; // prevent sliding
 			
-			if (timer == 0)
+			//diff = Math.abs(varSave.playerY - varSave.enemyY);
+			
+			
+			btimer += FlxG.elapsed;
+			
+			if (btimer > 1)
 			{
-				timer += FlxG.elapsed;
+				tofire = false;
+				btimer = 0;
+			}
+			else
+			{
+				tofire = true;
 			}
 			
-			if (timer > 1)
-			{
-				timer = 0;
-			}
-			
-			//movement
-			if (timer != 1)
+			if (velocity.x == 0 && ebuRight == false && ebuLeft == false)
 			{
 				play("Up");
-				//x = xpos;
-				//y = ypos;
-				//.getScreenXY()
+				x = varSave.enemyX;
+				y = varSave.enemyY;
+				ebuLeft = false;
+				ebuRight = false;
 			}
 			
-			if (timer == 1)
+			if (varSave.enLface == true && tofire == true)//tofire && varSave.enLface == true)
 			{
-				pressed = true;
-				velocity.x -= 130;
+				ebuLeft = true;
 				play("Left");
-
+				velocity.x -= 400;
 			}
-			if (timer == 1)
+			else
 			{
-				pressed = true;
-				velocity.x += 130;
-				play("Right");
+				ebuLeft = false;
 			}
+
+			if (varSave.enRface == true && tofire == true)//tofire && varSave.enRface == true)
+			{
+				ebuRight = true;
+				velocity.x += 400;
+				play("Right");	 
+			}
+			else 
+			{
+				ebuRight = false; 
+			}
+			
+			
 			
             super.update();
         }

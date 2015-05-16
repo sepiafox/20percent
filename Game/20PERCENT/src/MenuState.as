@@ -12,12 +12,16 @@ package
 		[Embed(source = "data/ReG.png")] private var ReGPng:Class;
 		[Embed(source = "data/ReL.png")] private var ReLPng:Class;
 		
+		private var newplay:PlayState;
+		
 		public function MenuState()
 		{	
 			
 		}
 		override public function create():void 
 		{
+			newplay = new PlayState();
+			
 			add(new FlxText(0,0,100,"Menu")); 
 			
 			add(new FlxSprite(0, 20, Lev1Png)); //more complex sprites to be added later
@@ -31,6 +35,11 @@ package
 		}
 		override public function update():void
 		{
+			if (FlxG.keys.P)
+			{
+				FlxG.switchState(newplay);
+			}
+			
 			super.update(); 
 			
 		}	

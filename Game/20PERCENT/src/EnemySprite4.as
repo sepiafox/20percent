@@ -34,6 +34,11 @@ package {
 			towind = false;
 			tospeed = false;
 			
+			if (health == 0)
+			{
+				varSave.gameWin == true;
+			}
+			
             super.update();
         }
         

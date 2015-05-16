@@ -57,7 +57,7 @@ package
 		{
 			super.update(); 
 			
-			if ( (varSave.plLeft || varSave.plRight) != 0)
+			if ( (varSave.plLface || varSave.plRface) != 0)
 			{
 				remove(cat);
 			}
@@ -65,19 +65,17 @@ package
 			//save = this;
 			
 			//menu w/ toggle
-			if (paused == true && FlxG.keys.P)
+			if (FlxG.keys.P)
 			{
-				paused = false;
-				FlxG.switchState(save);
+				FlxG.switchState(menu);
 			}
-			if (paused == false && FlxG.keys.P)
-			{
-				paused = true;
-				FlxG.switchState(menu); 
-			}
+
 			
 			//to next state
-			
+			//if ()
+			//{
+			//	
+			//}
 
 			FlxG.collide(player, map);
 			FlxG.collide(enemy, map);

@@ -5,9 +5,6 @@ package {
     public class EnemySprite extends FlxSprite {
     
         private var jump:Number = 0;
-		private var jumppause:Number = 0;
-		private var ttime:Number = 0;
-		private var djump:Boolean = false; //double jump
 		
 		//enemy movement variables
 		private var tojump:Boolean = false;
@@ -15,13 +12,10 @@ package {
 		private var toright:Boolean = false;
 		private var totele:Boolean = false;
 		
-		private var timer:Number = 0;
-		
 		private var distx:Number;
-		private var jumpfail:Boolean = false; //checks if the jump was succesful in going up 
-		private var fallfail:Boolean = false; // does the same as jumpfail for hopping down
-		private var oldy:Boolean; //old y value to compare for fail checks
-		private var shootfail:Boolean = false; //checks to see if enemy bullet sprite was blocked by wall
+		private var disty:Number;
+		
+		private var jtimer:Number = 0;
 		
 		[Embed(source = "data/walk4.png")] private var WalkPng:Class;
 		
@@ -40,38 +34,37 @@ package {
         }
         override public function update():void {
 			
+			acceleration.y = 200; //gravity 
+			//acceleration.x = 50; //wind mechanic if ever needed...
+            maxVelocity.y = 800; //falling max v
+			maxVelocity.x = 0; // prevent sliding
+			
 			tojump = false;
 			toleft = false;
 			toright = false;
 			totele = false;
 			
+			varSave.enemyX = x;
+			varSave.enemyY = y;
+			
 			distx = Math.abs(varSave.playerX - x);
-			//oldy = y;
+			disty = Math.abs(varSave.playerY - y);
 			
-			//if (timer == 0)
-			//{
-			//	timer += FlxG.elapsed;
-			//}
-			
-			//if (timer > 10)
-			//{
-			//	timer = 0;
-			//}
 			
 			//AI
-			if (varSave.playerX > x && distx > 50)//timer < 1 && timer > 0)//xpos > x && distance > 10)
+			if (varSave.playerX > x && distx > 50)
 			{
 				toleft = false;
 				toright = true;
 			}
 			
-			if (varSave.playerX < x && distx > 50)//timer < 3 && timer > 2)//xpos < x && distance > 10)
+			if (varSave.playerX < x && distx > 50)
 			{
 				toright = false;
 				toleft = true;
 			}
 			
-			if (varSave.playerY > y)
+			if (varSave.playerY < y)
 			{
 				tojump = true;
 			}
@@ -80,7 +73,68 @@ package {
 				tojump = false;
 			}
 			
-			//if (timer < 4 && timer > 3)//ypos > y && jumpfail == false)
+			
+			//platform jumping, complete with double jumping enabler
+			if(velocity.y == 0 && tojump == true && disty > 50)
+            { 
+				velocity.y = -180;	
+            }
+			
+			
+			//movement
+			if (toright == true)
+			{
+				velocity.x += 130;
+				play("Right");
+				varSave.enLface = false;
+				varSave.enRface = true;
+				varSave.engoR = true;
+			}
+			else
+			{
+				varSave.engoR = false;
+			}
+			if (toleft == true)
+			{
+				velocity.x -= 130;
+				play("Left");
+				varSave.enRface = false;
+				varSave.enLface = true;
+				varSave.engoR = true;
+			}
+			else
+			{
+				varSave.engoL = false;
+			}
+			//damage
+			if (varSave.eneDama == true)
+			{
+				varSave.ene1hea--;
+			}
+			
+			//unused but saved code
+			
+			//private var jumppause:Number = 0;
+			//private var ttime:Number = 0;
+			//private var djump:Boolean = false; //double jump
+			
+			//private var jumpfail:Boolean = false; //checks if the jump was succesful in going up 
+			//private var fallfail:Boolean = false; // does the same as jumpfail for hopping down
+			//private var oldy:Boolean; //old y value to compare for fail checks
+			//private var shootfail:Boolean = false; //checks to see if enemy bullet sprite was blocked by wall
+			
+			//more AI - jumpfail and fallfail
+			//if (tojump == true && y == oldy) 
+			//{
+			//	jumpfail = true;
+			//}
+			
+			//if (ypos < y && y == oldy)
+			//{
+			//	fallfail = true;
+			//}
+			
+						//if (timer < 4 && timer > 3)//ypos > y && jumpfail == false)
 			//{
 			//	tojump = true;
 			//	toleft = true;
@@ -104,18 +158,12 @@ package {
 			//	fallfail = false;
 			//}
 			
+			//if (jtimer >= 1)
+			//{
+			//	
+			//	jtimer = 0;
+			//}
 			
-			acceleration.y = 200; //gravity 
-			//acceleration.x = 50; //wind mechanic if ever needed...
-            maxVelocity.y = 800; //falling max v
-			maxVelocity.x = 0; // prevent sliding
-			
-
-			//platform jumping, complete with double jumping enabler
-			if(velocity.y == 0 && tojump == true) //(jump <= .9)
-            {
-                    velocity.y = -180; 
-            }
 			
 			//teleportion
 			//if (FlxG.keys.SHIFT)
@@ -129,27 +177,14 @@ package {
 			//	ttime = 0;
 			//}
 			
-			//movement
-			if (toright == true)
-			{
-				velocity.x += 130;
-				play("Right");
-			}
-			if (toleft == true)
-			{
-				velocity.x -= 130;
-				play("Left");
-			}
-			
-			//more AI - jumpfail and fallfail
-			//if (tojump == true && y == oldy) 
+			//if (timer == 0)
 			//{
-			//	jumpfail = true;
+			//	timer += FlxG.elapsed;
 			//}
 			
-			//if (ypos < y && y == oldy)
+			//if (timer > 10)
 			//{
-			//	fallfail = true;
+			//	timer = 0;
 			//}
 			
             super.update();

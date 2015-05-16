@@ -32,6 +32,12 @@ package {
 			toright = false;
 			tospeed = false;
 			
+			//damage
+			if (varSave.eneDama == true)
+			{
+				varSave.ene1hea--;
+			}
+			
             super.update();
         }
         

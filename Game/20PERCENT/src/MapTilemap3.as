@@ -6,7 +6,7 @@ package
 	{
 		[Embed(source = "data/tilemap18.png")] private var tilemapPng:Class;
 		
-		[Embed(source = "data/map1.txt", mimeType = "application/octet-stream")] private var mapTxt:Class;
+		[Embed(source = "data/map3.txt", mimeType = "application/octet-stream")] private var mapTxt:Class;
 			
 		public function MapTilemap3() 
 		{
