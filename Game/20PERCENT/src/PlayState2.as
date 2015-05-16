@@ -13,7 +13,8 @@ package
 		private var paused:Boolean = false;
 		
 		private var menu:MenuState;
-		//private var twoto3:Twoto3StateState;
+		private var twoto3:Twoto3State;
+		private var over:GameOverState;
 		
 		private var map:MapTilemap2;
 		
@@ -46,7 +47,8 @@ package
 			cat = new CatSprite(0,0);
 			
 			menu = new MenuState();
-			//twoto3 = new Twoto3State();
+			twoto3 = new Twoto3State();
+			over = new GameOverState();
 			
 			paused = false;
 			
@@ -123,10 +125,15 @@ package
 			add(playheanum);
 			add(eneheanum);
 			
-			//if (varSave.ene2hea == 0)
-			//{
-			//	FlxG.switchState(twoto3);
-			//}
+			if (varSave.ene2hea == 0)
+			{
+				FlxG.switchState(twoto3);
+			}
+			
+			if (varSave.playerhea == 0)
+			{
+				FlxG.switchState(over);
+			}
 			
 		}	
 	}

@@ -30,8 +30,8 @@ package
 		public static var engoL:Boolean;
 		
 		public static var ene1hea:Number = 100; //all enemy healths of each level
-		public static var ene2hea:Number = 300;
-		public static var ene3hea:Number = 200;
+		public static var ene2hea:Number = 200;
+		public static var ene3hea:Number = 300;
 		public static var ene4hea:Number = 400;
 		
 		public static var eneDama:Boolean = false;

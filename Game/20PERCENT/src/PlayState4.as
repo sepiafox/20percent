@@ -13,7 +13,8 @@ package
 		private var paused:Boolean = false;
 		
 		private var menu:MenuState;
-		//private var twoto3:Twoto3StateState;
+		private var win:GameWinState;
+		private var over:GameOverState;
 		
 		private var map:MapTilemap4;
 		
@@ -46,7 +47,8 @@ package
 			cat = new CatSprite(0,0);
 			
 			menu = new MenuState();
-			//twoto3 = new Twoto3State();
+			win = new GameWinState();
+			over = new GameOverState();
 			
 			paused = false;
 			
@@ -60,7 +62,7 @@ package
 			FlxG.worldBounds = new FlxRect(0, 0, map.width, map.height);	
 			
 			playstring = varSave.playerhea + "";
-			enestring = varSave.ene1hea + "";
+			enestring = varSave.ene4hea + "";
 			
 			playheanum = new FlxText(18, 225, 100, playstring);
 			playheanum.color = 0XFF0000;
@@ -109,7 +111,7 @@ package
 			
 			
 			playstring = varSave.playerhea + "";
-			enestring = varSave.ene2hea + "";
+			enestring = varSave.ene4hea + "";
 			
 			
 			remove(playheanum);
@@ -123,10 +125,14 @@ package
 			add(playheanum);
 			add(eneheanum);
 			
-			//if (varSave.ene2hea == 0)
-			//{
-			//	FlxG.switchState(twoto3);
-			//}
+			if (varSave.ene4hea == 0)
+			{
+				FlxG.switchState(win);
+			}
+			if (varSave.playerhea == 0)
+			{
+				FlxG.switchState(over);
+			}
 			
 		}	
 	}

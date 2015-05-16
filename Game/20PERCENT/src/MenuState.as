@@ -34,16 +34,21 @@ package
 		{
 			newplay = new PlayState();
 			
-			add(new FlxText(0,0,100,"Menu")); 
+			add(new FlxText(0, 0, 300, "Menu")); 
+			add(new FlxText(0, 30, 100, "Press 1 for Level 1")); 
+			add(new FlxText(0, 50, 100, "Press 2 for Level 2")); 
+			add(new FlxText(0, 70, 100, "Press 3 for Level 3")); 
+			add(new FlxText(0, 90, 100, "Press 4 for Level 4")); 
+			add(new FlxText(0, 110, 700, "(Keypad Numbers Do Not Work)")); 
 			
-			add(new FlxSprite(0, 20, Lev1Png)); //more complex sprites to be added later
-			add(new FlxSprite(0, 40, Lev2Png));
-			add(new FlxSprite(0, 60, Lev3Png));
-			add(new FlxSprite(0, 80, Lev4Png));
+			//add(new FlxSprite(0, 20, Lev1Png)); //more complex sprites to be added later
+			//add(new FlxSprite(0, 40, Lev2Png));
+			//add(new FlxSprite(0, 60, Lev3Png));
+			//add(new FlxSprite(0, 80, Lev4Png));
 			
-			add(new FlxSprite(0, 120, ReGPng));
+			//add(new FlxSprite(0, 120, ReGPng));
 			
-			add(new FlxSprite(0, 170, ReLPng)); 
+			//add(new FlxSprite(0, 170, ReLPng)); 
 			
 			//demo cheats
 			win = new GameWinState;
@@ -85,19 +90,19 @@ package
 			{
 				FlxG.switchState(t3);
 			}
-			if (FlxG.keys.ONE)
+			if (FlxG.keys.ONE && !FlxG.keys.T)
 			{
 				FlxG.switchState(le1);
 			}
-			if (FlxG.keys.TWO)
+			if (FlxG.keys.TWO && !FlxG.keys.T)
 			{
 				FlxG.switchState(le2);
 			}
-			if (FlxG.keys.THREE)
+			if (FlxG.keys.THREE && !FlxG.keys.T)
 			{
 				FlxG.switchState(le3);
 			}
-			if (FlxG.keys.FOUR)
+			if (FlxG.keys.FOUR && !FlxG.keys.T)
 			{
 				FlxG.switchState(le4);
 			}
