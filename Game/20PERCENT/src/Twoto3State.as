@@ -4,7 +4,11 @@ package
 	 
 	public class Twoto3State extends FlxState
 	{	
-		public var timer:Boolean;
+		public var timer:Number;
+		
+		public var play3:PlayState3;
+		
+		public var text:FlxText;
 		
 		public function Twoto3State()
 		{	
@@ -12,7 +16,9 @@ package
 		}
 		override public function create():void 
 		{	
+			play3 = new PlayState3();
 			
+			text = new FlxText(130, 105, 500, "Level 2 Cleared!");
 		}
 		override public function update():void
 		{
@@ -22,9 +28,8 @@ package
 			
 			if (timer > 4)
 			{
-				FlxG.switchState(PlayState3);
+				FlxG.switchState(play3);
 			}
-			
 		}	
 	}
 }

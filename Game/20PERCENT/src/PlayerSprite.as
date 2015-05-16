@@ -93,7 +93,7 @@ package {
 			//health control
 			if (varSave.playDama == true)
 			{
-				health--;
+				varSave.playerhea--;
 			}
 			
 			htimer = FlxG.elapsed; 

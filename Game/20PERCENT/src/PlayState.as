@@ -1,5 +1,6 @@
 package  
 {
+	import flash.sampler.NewObjectSample;
 	import org.flixel.*;
 	 
 	public class PlayState extends FlxState
@@ -13,6 +14,9 @@ package
 		private var paused:Boolean = false;
 		
 		private var menu:MenuState;
+		private var oneto2:Oneto2State;
+		private var over:GameOverState;
+		
 		private var map:MapTilemap;
 		
 		private var save:PlayState;
@@ -22,6 +26,10 @@ package
 		public var cat:CatSprite;
 		public var cattimer:Number = 0;
 		
+		public var playheanum:FlxText;
+		public var eneheanum:FlxText;
+		public var playstring:String;
+		public var enestring:String;
 		
 		public function PlayState()
 		{	
@@ -40,6 +48,9 @@ package
 			cat = new CatSprite(0,0);
 			
 			menu = new MenuState();
+			oneto2 = new Oneto2State();
+			over = new GameOverState();
+			
 			
 			paused = false;
 			
@@ -50,7 +61,18 @@ package
 			
 			add(cat);
 			
-			FlxG.worldBounds = new FlxRect(0, 0, map.width, map.height);		
+			FlxG.worldBounds = new FlxRect(0, 0, map.width, map.height);	
+			
+			playstring = varSave.playerhea + "";
+			enestring = varSave.ene1hea + "";
+			
+			playheanum = new FlxText(18, 225, 100, playstring);
+			playheanum.color = 0XFF0000;
+			eneheanum = new FlxText(285, 225, 100, enestring);
+			eneheanum.color = 0X15FE8D;
+			
+			add(playheanum);
+			add(eneheanum);
 			
 		}
 		override public function update():void
@@ -88,6 +110,33 @@ package
 			
 			varSave.eneDama = FlxG.overlap(bullet, enemy);
 			varSave.playDama = FlxG.overlap(enebullet, player);
+			
+			
+			playstring = varSave.playerhea + "";
+			enestring = varSave.ene1hea + "";
+			
+			
+			remove(playheanum);
+			remove(eneheanum);
+			
+			playheanum = new FlxText(18, 225, 100, playstring);
+			playheanum.color = 0XFF0000;
+			eneheanum = new FlxText(285, 225, 100, enestring);
+			eneheanum.color = 0X15FE8D;
+			
+			add(playheanum);
+			add(eneheanum);
+			
+			if (varSave.ene1hea == 0)
+			{
+				FlxG.switchState(oneto2);
+			}
+			
+			if (varSave.playerhea == 0)
+			{
+				FlxG.switchState(over);
+			}
+			
 			
 		}	
 	}

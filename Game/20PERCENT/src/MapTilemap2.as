@@ -8,7 +8,7 @@ package
 		
 		[Embed(source = "data/map2.txt", mimeType = "application/octet-stream")] private var mapTxt:Class;
 			
-		public function MapTilemap() 
+		public function MapTilemap2() 
 		{
 			loadMap(new mapTxt, tilemapPng, 16, 16, 0, 0, 0);
 		}

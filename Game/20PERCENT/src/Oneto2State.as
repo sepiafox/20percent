@@ -4,7 +4,11 @@ package
 	 
 	public class Oneto2State extends FlxState
 	{	
-		public var timer:Boolean;
+		public var timer:Number;
+		
+		public var play2:PlayState2;
+		
+		public var text:FlxText;
 		
 		public function Oneto2State()
 		{	
@@ -12,7 +16,11 @@ package
 		}
 		override public function create():void 
 		{	
+			play2 = new PlayState2();
 			
+			text = new FlxText(130, 105, 500, "Level 1 Cleared!");
+			
+			add(text);
 		}
 		override public function update():void
 		{
@@ -22,7 +30,7 @@ package
 			
 			if (timer > 4)
 			{
-				FlxG.switchState(PlayState2);
+				FlxG.switchState(play2);
 			}
 		}	
 	}
