@@ -28,7 +28,7 @@ package
 		
 		public function HelloWorld()
 		{
-			super(320, 240, PlayState, 2);
+			super(320, 240, StartState, 2); //change back to playstate
 			//if (PlayState.paused = true)
 			//{
 				//FlxG.switchState(MenuState); //gives error

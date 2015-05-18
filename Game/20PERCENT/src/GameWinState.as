@@ -8,6 +8,8 @@ package
 		public var youw:FlxText;
 		public var instru:FlxText;
 		
+		public var menu:MenuState;
+		
 		public function GameWinState()
 		{	
 			
@@ -24,10 +26,17 @@ package
 			add(congr);
 			add(youw);
 			add(instru);
+			
+			menu = new MenuState();
 		}
 		override public function update():void
 		{
 			super.update(); 
+			
+			if (FlxG.keys.P)
+			{
+				FlxG.switchState(menu);
+			}
 			
 		}	
 	}

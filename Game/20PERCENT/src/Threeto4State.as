@@ -24,7 +24,7 @@ package
 			menu = new MenuState();
 			
 			text = new FlxText(130, 105, 500, "Level 3 Cleared!");
-			
+			text.color = 0XE680FF;
 			add(text);
 			
 			timerstring = timer + "";

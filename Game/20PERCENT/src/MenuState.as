@@ -14,6 +14,8 @@ package
 		
 		private var newplay:PlayState;
 		
+		private var menu:FlxText;
+		
 		//demo cheats
 		private var win:GameWinState;
 		private var over:GameOverState;
@@ -34,12 +36,15 @@ package
 		{
 			newplay = new PlayState();
 			
-			add(new FlxText(0, 0, 300, "Menu")); 
-			add(new FlxText(0, 30, 100, "Press 1 for Level 1")); 
-			add(new FlxText(0, 50, 100, "Press 2 for Level 2")); 
-			add(new FlxText(0, 70, 100, "Press 3 for Level 3")); 
-			add(new FlxText(0, 90, 100, "Press 4 for Level 4")); 
-			add(new FlxText(0, 110, 700, "(Keypad Numbers Do Not Work)")); 
+			menu = new FlxText(0, 0, 300, "Menu");
+			menu.color = 0XCC00FF;
+			add(menu); 
+			add(new FlxText(0, 30, 500, "Press # for Level #1-4")); 
+			add(new FlxText(0, 60, 500, "Advanced Navigation:")); 
+			add(new FlxText(0, 80, 500, "Press # + T for Transition #1-3")); 
+			add(new FlxText(0, 100, 500, "Press W for win screen"));
+			add(new FlxText(0, 120, 500, "Press O for over screen")); 
+			add(new FlxText(0, 140, 500, "Press B for start screen")); 
 			
 			//add(new FlxSprite(0, 20, Lev1Png)); //more complex sprites to be added later
 			//add(new FlxSprite(0, 40, Lev2Png));
@@ -78,31 +83,31 @@ package
 			{
 				FlxG.switchState(over);
 			}
-			if (FlxG.keys.ONE && FlxG.keys.T)
+			if ((FlxG.keys.ONE || FlxG.keys.NUMPADONE) && FlxG.keys.T)
 			{
 				FlxG.switchState(t1);
 			}
-			if (FlxG.keys.TWO && FlxG.keys.T)
+			if ((FlxG.keys.TWO || FlxG.keys.NUMPADTWO) && FlxG.keys.T)
 			{
 				FlxG.switchState(t2);
 			}
-			if (FlxG.keys.THREE && FlxG.keys.T)
+			if ((FlxG.keys.THREE || FlxG.keys.NUMPADTHREE) && FlxG.keys.T)
 			{
 				FlxG.switchState(t3);
 			}
-			if (FlxG.keys.ONE && !FlxG.keys.T)
+			if ((FlxG.keys.ONE || FlxG.keys.NUMPADONE) && !FlxG.keys.T)
 			{
 				FlxG.switchState(le1);
 			}
-			if (FlxG.keys.TWO && !FlxG.keys.T)
+			if ((FlxG.keys.TWO || FlxG.keys.NUMPADTWO) && !FlxG.keys.T)
 			{
 				FlxG.switchState(le2);
 			}
-			if (FlxG.keys.THREE && !FlxG.keys.T)
+			if ((FlxG.keys.THREE || FlxG.keys.NUMPADTHREE) && !FlxG.keys.T)
 			{
 				FlxG.switchState(le3);
 			}
-			if (FlxG.keys.FOUR && !FlxG.keys.T)
+			if ((FlxG.keys.FOUR || FlxG.keys.NUMPADFOUR) && !FlxG.keys.T)
 			{
 				FlxG.switchState(le4);
 			}
